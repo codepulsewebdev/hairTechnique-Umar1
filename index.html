@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hair Technique — Lenasia</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans:wght@400;600&display=swap');
+
+    :root {
+      --bg-dark: #1a1a1a;
+      --bg-light: #f5f3f0;
+      --text-light: #f5f3f0;
+      --text-dark: #2c2c2c;
+      --gold: #bfa06f;
+      --glass-bg: rgba(245, 243, 240, 0.1);
+      --glass-blur: 20px;
+      --shadow-subtle: rgba(0,0,0,0.3);
+      --shadow-gold: rgba(191,160,111,0.3);
+      --nav-height: 70px;
+      --max-width: 1200px;
+      --transition-smooth: 0.4s ease;
+    }
+
+    /* Reset */
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+      font-family: 'Open Sans', sans-serif;
+      color: var(--text-light);
+      user-select: none;
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    html, body {
+      height: 100%;
+      background: var(--bg-dark);
+      overflow-x: hidden;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color var(--transition-smooth);
+    }
+    a:hover, a:focus {
+      color: var(--gold);
+      outline: none;
+    }
+    ul {
+      list-style: none;
+    }
+
+    /* Background swirl - muted with subtle grayscale */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 50%; left: 50%;
+      width: 200vw;
+      height: 200vh;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at center, transparent 45%, #2c2c2c 90%),
+        repeating-conic-gradient(rgba(191,160,111,0.1) 0 3deg, rgba(0,0,0,0.05) 3deg 6deg);
+      background-blend-mode: soft-light;
+      transform: translate(-50%, -50%) rotate(0deg);
+      animation: swirl-rotate 240s linear infinite;
+      z-index: -1;
+      filter: brightness(0.85) contrast(1.1);
+      mix-blend-mode: luminosity;
+    }
+    @keyframes swirl-rotate {
+      0% { transform: translate(-50%, -50%) rotate(0deg);}
+      100% { transform: translate(-50%, -50%) rotate(360deg);}
+    }
+
+    /* Navbar */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--nav-height);
+      background: rgba(21, 20, 19, 0.85);
+      backdrop-filter: blur(var(--glass-blur));
+      box-shadow: 0 2px 12px var(--shadow-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 3rem;
+      z-index: 9999;
+    }
+    nav .logo {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.8rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      user-select: none;
+      cursor: default;
+    }
+    nav ul {
+      display: flex;
+      gap: 2rem;
+      font-weight: 600;
+      font-size: 1rem;
+      align-items: center;
+    }
+    nav ul li {
+      position: relative;
+    }
+    nav ul li a {
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+    }
+    nav ul li a:hover,
+    nav ul li a:focus {
+      color: var(--gold);
+      text-shadow: 0 0 8px var(--gold);
+      outline: none;
+    }
+
+    /* Cart count subtle gold badge */
+    #cart-count {
+      background: var(--gold);
+      color: var(--bg-dark);
+      border-radius: 50%;
+      padding: 0 8px;
+      font-weight: 700;
+      font-size: 0.75rem;
+      margin-left: 6px;
+      box-shadow: 0 0 8px var(--shadow-gold);
+      user-select: none;
+    }
+
+    /* Dark mode toggle - elegant */
+    #darkToggle {
+      cursor: pointer;
+      width: 42px;
+      height: 22px;
+      border-radius: 12px;
+      background: var(--gold);
+      position: relative;
+      box-shadow: 0 0 10px var(--gold);
+      transition: background 0.3s ease;
+      flex-shrink: 0;
+    }
+    #darkToggle .toggle-thumb {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--bg-dark);
+      box-shadow: inset 0 0 6px #0008;
+      transition: left 0.3s ease;
+    }
+    #darkToggle.active {
+      background: var(--bg-light);
+      box-shadow: 0 0 10px var(--shadow-subtle);
+    }
+    #darkToggle.active .toggle-thumb {
+      left: 22px;
+      background: var(--bg-dark);
+    }
+
+    /* Container */
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: calc(var(--nav-height) + 2rem) 3rem 4rem;
+    }
+
+    /* Hero Section */
+    header.hero {
+      text-align: center;
+      margin-bottom: 6rem;
+      user-select: none;
+    }
+    header.hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 7vw, 5rem);
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-shadow: 0 0 12px var(--gold);
+      margin-bottom: 1rem;
+      line-height: 1.1;
+    }
+    header.hero p {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--bg-light);
+      margin-bottom: 3rem;
+      font-style: italic;
+      letter-spacing: 0.06em;
+      user-select: none;
+    }
+    .btn-primary {
+      background: var(--gold);
+      color: var(--bg-dark);
+      padding: 1rem 3rem;
+      font-weight: 700;
+      font-size: 1.25rem;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      box-shadow:
+        0 0 18px var(--gold);
+      transition: all 0.35s ease;
+      user-select: none;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-family: 'Playfair Display', serif;
+    }
+    .btn-primary:hover,
+    .btn-primary:focus {
+      background: transparent;
+      color: var(--gold);
+      box-shadow: inset 0 0 12px var(--gold);
+      outline: none;
+      border: 2px solid var(--gold);
+      transform: scale(1.05);
+    }
+
+    /* Section Titles */
+    section h2.section-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 2.8rem;
+      color: var(--gold);
+      text-shadow: 0 0 8px var(--gold);
+      margin-bottom: 3rem;
+      text-align: center;
+      letter-spacing: 0.12em;
+      user-select: none;
+    }
+
+    /* Services Section */
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 3rem;
+      margin-bottom: 6rem;
+      user-select: none;
+    }
+    .service-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(var(--glass-blur));
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      box-shadow: 0 8px 20px var(--shadow-subtle);
+      border: 1px solid rgba(191,160,111,0.15);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      cursor: default;
+    }
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 28px var(--shadow-gold);
+      border-color: var(--gold);
+    }
+    .service-icon {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      color: var(--gold);
+      user-select: none;
+    }
+    .service-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.4rem;
+      margin-bottom: 0.7rem;
+      color: var(--bg-light);
+    }
+    .service-desc {
+      font-size: 1rem;
+      font-style: italic;
+      color: #ddd7cc;
+      user-select: none;
+      line-height: 1.5;
+    }
+
+    /* Products Section */
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+      gap: 2.5rem;
+      margin-bottom: 6rem;
+      user-select: none;
+    }
+    .product-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(var(--glass-blur));
+      border-radius: 20px;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: 0 10px 24px var(--shadow-subtle);
+      border: 1px solid rgba(191,160,111,0.1);
+      transition: box-shadow 0.35s ease, transform 0.35s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .product-card:hover {
+      box-shadow: 0 16px 36px var(--shadow-gold);
+      transform: translateY(-6px);
+      border-color: var(--gold);
+    }
+    .product-image {
+      width: 100%;
+      aspect-ratio: 1 / 1.25;
+      object-fit: cover;
+      user-select: none;
+      border-bottom: 1px solid rgba(191,160,111,0.15);
+      transition: transform 0.4s ease;
+    }
+    .product-card:hover .product-image {
+      transform: scale(1.03);
+    }
+    .product-info {
+      padding: 1.5rem 1.8rem;
+      flex-grow: 1;
+    }
+    .product-name {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      margin-bottom: 0.4rem;
+      color: var(--bg-light);
+    }
+    .product-price {
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--gold);
+    }
+
+    /* Testimonials Section */
+    .testimonials {
+      max-width: 720px;
+      margin: 0 auto 6rem;
+      position: relative;
+      user-select: none;
+      font-family: 'Open Sans', sans-serif;
+      color: #d9d7d1;
+    }
+    .testimonial-slide {
+      background: var(--glass-bg);
+      backdrop-filter: blur(var(--glass-blur));
+      border-radius: 20px;
+      padding: 3rem 2.5rem;
+      box-shadow: 0 8px 22px var(--shadow-subtle);
+      border: 1px solid rgba(191,160,111,0.12);
+      text-align: center;
+      opacity: 0;
+      transform: translateX(100%);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      position: absolute;
+      width: 100%;
+      top: 0; left: 0;
+      pointer-events: none;
+    }
+    .testimonial-slide.active {
+      opacity: 1;
+      transform: translateX(0);
+      position: relative;
+      pointer-events: auto;
+    }
+    .testimonial-text {
+      font-style: italic;
+      font-size: 1.3rem;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+      color: #eeeae3;
+    }
+    .testimonial-author {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+    }
+    .testimonial-controls {
+      text-align: center;
+      margin-top: 1.8rem;
+    }
+    .testimonial-btn {
+      background: var(--gold);
+      border: none;
+      color: var(--bg-dark);
+      padding: 0.5rem 1.2rem;
+      margin: 0 0.9rem;
+      font-weight: 700;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .testimonial-btn:hover,
+    .testimonial-btn:focus {
+      background: transparent;
+      color: var(--gold);
+      border: 2px solid var(--gold);
+      outline: none;
+    }
+
+    /* Google Map Embed */
+    .map-container {
+      max-width: var(--max-width);
+      margin: 0 auto 6rem;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 8px 36px var(--shadow-subtle);
+      border: 1px solid rgba(191,160,111,0.12);
+      user-select: none;
+    }
+    iframe {
+      width: 100%;
+      height: 360px;
+      border: none;
+      filter: grayscale(0.6) contrast(1.15) brightness(0.85);
+      transition: filter 0.5s ease;
+    }
+    iframe:hover, iframe:focus-visible {
+      filter: grayscale(0) contrast(1) brightness(1);
+      outline: none;
+    }
+
+    /* Instagram Feed */
+    .instagram-feed {
+      max-width: var(--max-width);
+      margin: 0 auto 6rem;
+      display: flex;
+      overflow-x: auto;
+      gap: 1.3rem;
+      user-select: none;
+      padding-bottom: 0.5rem;
+    }
+    .instagram-feed img {
+      width: 160px;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 1rem;
+      box-shadow: 0 6px 15px rgba(191,160,111,0.25);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .instagram-feed img:hover {
+      transform: scale(1.08);
+      box-shadow: 0 10px 30px rgba(191,160,111,0.4);
+    }
+
+    /* Footer */
+    footer {
+      background: rgba(21, 20, 19, 0.85);
+      backdrop-filter: blur(var(--glass-blur));
+      text-align: center;
+      padding: 2.4rem 1rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #cfc7af;
+      box-shadow: inset 0 0 15px #fff4;
+      border-top: 1px solid rgba(191,160,111,0.15);
+      user-select: none;
+      font-family: 'Open Sans', sans-serif;
+      letter-spacing: 0.1em;
+    }
+
+    /* Floating WhatsApp Button */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--gold);
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      box-shadow: 0 0 14px var(--shadow-gold);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      z-index: 10000;
+    }
+    .whatsapp-float:hover {
+      background: var(--bg-light);
+      box-shadow: 0 0 18px var(--shadow-subtle);
+    }
+    .whatsapp-float svg {
+      width: 28px;
+      height: 28px;
+      fill: var(--bg-dark);
+      filter: drop-shadow(0 0 2px rgba(0,0,0,0.2));
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav {
+        padding: 0 1.5rem;
+      }
+      nav ul {
+        gap: 1.2rem;
+        font-size: 0.9rem;
+      }
+      .container {
+        padding: calc(var(--nav-height) + 1.5rem) 1.5rem 3rem;
+      }
+      header.hero h1 {
+        font-size: 3rem;
+      }
+      header.hero p {
+        font-size: 1.1rem;
+      }
+      .services {
+        grid-template-columns: 1fr;
+      }
+      .products {
+        grid-template-columns: 1fr;
+      }
+      .testimonial-btn {
+        padding: 0.45rem 1rem;
+        margin: 0 0.6rem;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <nav role="navigation" aria-label="Primary navigation">
+    <div class="logo" aria-current="page">Hair Technique</div>
+    <ul>
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#products">Shop</a></li>
+      <li><a href="#appointments">Book</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#cart">Cart (<span id="cart-count" aria-live="polite" aria-atomic="true">0</span>)</a></li>
+      <li id="darkToggle" aria-label="Toggle dark mode" role="button" tabindex="0" aria-pressed="false">
+        <div class="toggle-thumb"></div>
+      </li>
+    </ul>
+  </nav>
+
+  <main class="container" role="main">
+
+    <header id="hero" class="hero" role="banner">
+      <h1>Welcome to Hair Technique</h1>
+      <p>Luxury hair care in Lenasia</p>
+      <button class="btn-primary" onclick="document.getElementById('appointments').scrollIntoView({behavior:'smooth'})">Book Appointment</button>
+    </header>
+
+    <section id="services" aria-label="Our services">
+      <h2 class="section-title">Our Services</h2>
+      <div class="services">
+        <div class="service-card" tabindex="0" aria-describedby="desc1" role="region" aria-label="Haircuts service">
+          <div class="service-icon" aria-hidden="true">✂️</div>
+          <h3 class="service-title">Haircuts</h3>
+          <p id="desc1" class="service-desc">Stylish cuts tailored to your look.</p>
+        </div>
+        <div class="service-card" tabindex="0" aria-describedby="desc2" role="region" aria-label="Styling service">
+          <div class="service-icon" aria-hidden="true">💇‍♀️</div>
+          <h3 class="service-title">Styling</h3>
+          <p id="desc2" class="service-desc">Trendy styles for any occasion.</p>
+        </div>
+        <div class="service-card" tabindex="0" aria-describedby="desc3" role="region" aria-label="Hair treatments service">
+          <div class="service-icon" aria-hidden="true">🌿</div>
+          <h3 class="service-title">Hair Treatments</h3>
+          <p id="desc3" class="service-desc">Revitalize with nourishing treatments.</p>
+        </div>
+      </div>
+    </section>
+
+  
+  <h2>Featured Products</h2>
+  <div id="product-list" class="product-grid"></div>
+</section>
+
+<style>
+  
+  
+  .product-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    padding: 2rem 0;
+  }
+  .product-card {
+    position: relative;
+    width: 220px;
+    border-radius: 20px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 10px 25px rgba(191,160,111,0.15);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+  .product-card:hover {
+    transform: translateY(-15px) scale(1.05);
+    box-shadow: 0 15px 40px rgba(191,160,111,0.25);
+  }
+  .product-image {
+    width: 100%;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+  .product-card:hover .product-image {
+    transform: scale(1.08);
+  }
+  .product-info {
+    padding: 1rem;
+    text-align: center;
+  }
+  .product-name {
+    font-weight: 700;
+    font-size: 1.15rem;
+    margin: 0.5rem 0;
+  }
+  .product-price {
+    color: #bfa06f;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  .add-to-cart-btn {
+    position: absolute;
+    bottom: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    background: linear-gradient(135deg, #f5f3f0, #bfa06f);
+    color: #1a1a1a;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    font-weight: 700;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    box-shadow: 0 8px 20px rgba(191,160,111,0.2);
+  }
+  .product-card:hover .add-to-cart-btn {
+    bottom: 16px;
+    opacity: 1;
+  }
+  @media (max-width: 768px) {
+    .product-card { width: 45%; }
+  }
+  @media (max-width: 480px) {
+    .product-card { width: 100%; }
+  }
+</style>
+
+
+<!-- Cart Sidebar -->
+<aside id="cart-drawer" aria-label="Shopping cart" aria-hidden="true" role="region" tabindex="-1" style="position: fixed; top: 0; right: -400px; width: 360px; height: 100vh; background: var(--bg-dark); box-shadow: -4px 0 16px rgba(0,0,0,0.6); backdrop-filter: blur(var(--glass-blur)); padding: 2rem; display: flex; flex-direction: column; transition: right 0.35s ease; z-index: 11000;">
+  <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+    <h3 style="font-family: 'Playfair Display', serif; font-weight: 700; color: var(--gold); font-size: 1.8rem;">Your Cart</h3>
+    <button aria-label="Close cart" id="cart-close-btn" style="background: none; border: none; color: var(--gold); font-size: 1.6rem; cursor: pointer;">&times;</button>
+  </header>
+  <ul id="cart-items" style="flex-grow: 1; overflow-y: auto; list-style: none; padding: 0; margin: 0 0 2rem 0;"></ul>
+  <div style="border-top: 1px solid rgba(191,160,111,0.3); padding-top: 1rem; color: var(--gold); font-weight: 700; font-size: 1.25rem; user-select: none;">
+    Total: $<span id="cart-total">0.00</span>
+  </div>
+  <button id="checkout-btn" class="btn-primary" style="margin-top: 1rem; width: 100%;">Checkout</button>
+</aside>
+
+
+    <section id="appointments" aria-label="Book appointment">
+      <h2 class="section-title">Book an Appointment</h2>
+      <form style="max-width: 500px; margin: 0 auto; color: var(--text-light);" aria-live="polite" aria-describedby="form-desc">
+        <p id="form-desc" style="font-style: italic; margin-bottom: 1rem; text-align: center;">Please fill in the form below to schedule your appointment.</p>
+        <label for="name">Full Name</label><br/>
+        <input id="name" name="name" type="text" placeholder="Your full name" required style="width: 100%; padding: 0.6rem; border-radius: 8px; border: 1px solid var(--gold); background: transparent; color: var(--text-light); margin-bottom: 1rem;" />
+
+        <label for="email">Email</label><br/>
+        <input id="email" name="email" type="email" placeholder="Your email address" required style="width: 100%; padding: 0.6rem; border-radius: 8px; border: 1px solid var(--gold); background: transparent; color: var(--text-light); margin-bottom: 1rem;" />
+
+        <label for="service">Select Service</label><br/>
+        <select id="service" name="service" required style="width: 100%; padding: 0.6rem; border-radius: 8px; border: 1px solid var(--gold); background: transparent; color: var(--text-light); margin-bottom: 1rem;">
+          <option value="" disabled selected style="color: #bbb;">-- Choose a service --</option>
+          <option value="Haircut">Haircut</option>
+          <option value="Styling">Styling</option>
+          <option value="Treatment">Hair Treatment</option>
+        </select>
+
+        <label for="date">Appointment Date</label><br/>
+        <input id="date" name="date" type="date" required style="width: 100%; padding: 0.6rem; border-radius: 8px; border: 1px solid var(--gold); background: transparent; color: var(--text-light); margin-bottom: 1rem;" />
+
+        <button type="submit" class="btn-primary" style="width: 100%;">Confirm Booking</button>
+      </form>
+    </section>
+
+    <section id="testimonials" aria-label="Customer testimonials">
+      <h2 class="section-title">What Our Clients Say</h2>
+      <div class="testimonials" role="region" aria-live="polite" aria-atomic="true">
+        <article class="testimonial-slide active" tabindex="0">
+          <p class="testimonial-text">"Best hair salon experience I've ever had. The staff are amazing!"</p>
+          <p class="testimonial-author">- Sarah K.</p>
+        </article>
+        <article class="testimonial-slide" tabindex="0">
+          <p class="testimonial-text">"My hair has never looked so healthy and stylish. Highly recommend!"</p>
+          <p class="testimonial-author">- Jason M.</p>
+        </article>
+        <article class="testimonial-slide" tabindex="0">
+          <p class="testimonial-text">"Luxury treatment with a personal touch. I'll definitely be back."</p>
+          <p class="testimonial-author">- Aisha P.</p>
+        </article>
+        <div class="testimonial-controls">
+          <button class="testimonial-btn" aria-label="Previous testimonial" onclick="showTestimonial(-1)">‹</button>
+          <button class="testimonial-btn" aria-label="Next testimonial" onclick="showTestimonial(1)">›</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" aria-label="Contact us and location">
+      <h2 class="section-title">Visit Us</h2>
+      <div class="map-container" role="region" aria-label="Map showing salon location">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3329.6132652102687!2d27.93214491521778!3d-26.330007481399234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e956d23f5c3d2db%3A0x2124c19ab5b5683d!2sLenasia%20Shopping%20Centre!5e0!3m2!1sen!2sza!4v1701581471131!5m2!1sen!2sza"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Salon location in Lenasia"
+        ></iframe>
+      </div>
+    </section>
+
+    <section aria-label="Instagram feed preview" class="instagram-feed" role="region" aria-live="polite">
+      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=160&q=80" alt="Instagram preview 1" tabindex="0" />
+      <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=160&q=80" alt="Instagram preview 2" tabindex="0" />
+      <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=160&q=80" alt="Instagram preview 3" tabindex="0" />
+      <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=160&q=80" alt="Instagram preview 4" tabindex="0" />
+      <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=160&q=80" alt="Instagram preview 5" tabindex="0" />
+    </section>
+
+  </main>
+
+  <footer>
+    &copy; 2025 Hair Technique — Lenasia | All rights reserved
+  </footer>
+
+  <div class="whatsapp-float" aria-label="Chat on WhatsApp" role="button" tabindex="0" onclick="window.open('https://wa.me/27123456789', '_blank')">
+    <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false"><path d="M20.52 3.48A11.952 11.952 0 0 0 3.48 20.52L2 22l1.48-1.48a12 12 0 1 0 16.99-17.04zM12 21a9 9 0 0 1-5.28-1.69l-.38-.25-3.14.82.84-3.07-.25-.37A9 9 0 1 1 12 21zm5.21-7.13c-.29-.14-1.71-.84-1.98-.94-.27-.11-.47-.14-.67.14s-.77.94-.94 1.14c-.17.2-.34.23-.63.08a6.54 6.54 0 0 1-1.92-1.18 7.34 7.34 0 0 1-1.36-1.68c-.14-.23-.02-.35.13-.5.13-.13.3-.34.44-.52.15-.18.2-.31.3-.52.1-.21.05-.39-.02-.54-.07-.14-.67-1.61-.92-2.2-.24-.57-.48-.5-.67-.51-.17 0-.37 0-.56 0s-.52.07-.79.39c-.27.31-1.03 1-1.03 2.44 0 1.43 1.06 2.8 1.2 3a9.55 9.55 0 0 0 6.49 6.52c.9.39 1.6.32 2.2.2a3.88 3.88 0 0 0 1.5-.97 3.58 3.58 0 0 0 1.29-2.02c.12-.22.12-.42.09-.58-.03-.15-.27-.23-.56-.37z"/></svg>
+  </div>
+
+  <script>
+    // Dark mode toggle with accessibility updates
+    const darkToggle = document.getElementById('darkToggle');
+    darkToggle.addEventListener('click', () => {
+      darkToggle.classList.toggle('active');
+      const pressed = darkToggle.classList.contains('active');
+      darkToggle.setAttribute('aria-pressed', pressed ? 'true' : 'false');
+      if (pressed) {
+        document.documentElement.style.setProperty('--bg-dark', '#f5f3f0');
+        document.documentElement.style.setProperty('--bg-light', '#1a1a1a');
+        document.documentElement.style.setProperty('--text-light', '#2c2c2c');
+        document.documentElement.style.setProperty('--text-dark', '#f5f3f0');
+        document.documentElement.style.setProperty('--glass-bg', 'rgba(26, 26, 26, 0.1)');
+        document.documentElement.style.setProperty('--shadow-subtle', 'rgba(0,0,0,0.12)');
+        document.documentElement.style.setProperty('--shadow-gold', 'rgba(191,160,111,0.15)');
+      } else {
+        document.documentElement.style.setProperty('--bg-dark', '#1a1a1a');
+        document.documentElement.style.setProperty('--bg-light', '#f5f3f0');
+        document.documentElement.style.setProperty('--text-light', '#f5f3f0');
+        document.documentElement.style.setProperty('--text-dark', '#2c2c2c');
+        document.documentElement.style.setProperty('--glass-bg', 'rgba(245, 243, 240, 0.1)');
+        document.documentElement.style.setProperty('--shadow-subtle', 'rgba(0,0,0,0.3)');
+        document.documentElement.style.setProperty('--shadow-gold', 'rgba(191,160,111,0.3)');
+      }
+    });
+
+    // Keyboard accessibility for darkToggle
+    darkToggle.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        darkToggle.click();
+      }
+    });
+
+    // Testimonial Carousel logic
+    let currentTestimonial = 0;
+    const testimonials = document.querySelectorAll('.testimonial-slide');
+    function showTestimonial(step) {
+      testimonials[currentTestimonial].classList.remove('active');
+      currentTestimonial += step;
+      if (currentTestimonial < 0) currentTestimonial = testimonials.length - 1;
+      if (currentTestimonial >= testimonials.length) currentTestimonial = 0;
+      testimonials[currentTestimonial].classList.add('active');
+    }
+    window.showTestimonial = showTestimonial;
+
+  </script>
+<script>
+  const products = [
+    {
+      id: 1,
+      name: "Natural Shine Shampoo",
+      price: 15.99,
+      img: "https://images.unsplash.com/photo-1589747268296-fdc975dc0bde?auto=format&fit=crop&w=400&q=80",
+      alt: "Bottle of Natural Shine Shampoo",
+    },
+    {
+      id: 2,
+      name: "Silk Touch Conditioner",
+      price: 17.99,
+      img: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=400&q=80",
+      alt: "Bottle of Silk Touch Conditioner",
+    },
+    {
+      id: 3,
+      name: "Volume Boost Hair Spray",
+      price: 12.49,
+      img: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=400&q=80",
+      alt: "Can of Volume Boost Hair Spray",
+    },
+  ];
+
+  const productListEl = document.getElementById('product-list');
+  const cartCountEl = document.getElementById('cart-count');
+  const cartDrawer = document.getElementById('cart-drawer');
+  const cartCloseBtn = document.getElementById('cart-close-btn');
+  const cartItemsEl = document.getElementById('cart-items');
+  const cartTotalEl = document.getElementById('cart-total');
+  const checkoutBtn = document.getElementById('checkout-btn');
+
+  let cart = JSON.parse(localStorage.getItem('cart')) || {};
+
+  // Render product cards with add-to-cart buttons
+  function renderProducts() {
+    productListEl.innerHTML = products.map(p => `
+      <article class="product-card" tabindex="0" aria-label="${p.name}, R${p.price.toFixed(2)}">
+        <img class="product-image" src="${p.img}" alt="${p.alt}" />
+        <div class="product-info">
+          <h3 class="product-name">${p.name}</h3>
+          <p class="product-price">R${p.price.toFixed(2)}</p>
+          <button aria-label="Add ${p.name} to cart" class="btn-primary add-to-cart-btn" data-id="${p.id}" style="margin-top: 0.8rem; font-size: 1rem; padding: 0.6rem 1.5rem;">Add to Cart</button>
+        </div>
+      </article>
+    `).join('');
+  }
+
+  // Update cart count bubble
+  function updateCartCount() {
+    const totalCount = Object.values(cart).reduce((sum, item) => sum + item.quantity, 0);
+    cartCountEl.textContent = totalCount;
+    if (totalCount === 0) {
+      cartCountEl.style.display = 'none';
+    } else {
+      cartCountEl.style.display = 'inline-block';
+    }
+  }
+
+  // Render cart items inside drawer
+  function renderCart() {
+    if (Object.keys(cart).length === 0) {
+      cartItemsEl.innerHTML = `<li style="text-align:center; color: #bbb; padding: 2rem 0;">Your cart is empty.</li>`;
+      cartTotalEl.textContent = "0.00";
+      return;
+    }
+    let total = 0;
+    cartItemsEl.innerHTML = Object.values(cart).map(item => {
+      const itemTotal = item.price * item.quantity;
+      total += itemTotal;
+      return `
+        <li style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <div style="flex-grow: 1;">
+            <div style="font-weight: 700; color: var(--gold); font-family: 'Playfair Display', serif;">${item.name}</div>
+            <div style="font-size: 0.85rem; color: #ccc;">$${item.price.toFixed(2)} x ${item.quantity} = $${itemTotal.toFixed(2)}</div>
+            <div style="margin-top: 0.4rem;">
+              <button aria-label="Decrease quantity of ${item.name}" class="cart-btn-decrease" data-id="${item.id}" style="background:none; border:none; color: var(--gold); cursor:pointer; font-weight:bold; font-size:1.1rem; padding:0 0.5rem;">−</button>
+              <button aria-label="Increase quantity of ${item.name}" class="cart-btn-increase" data-id="${item.id}" style="background:none; border:none; color: var(--gold); cursor:pointer; font-weight:bold; font-size:1.1rem; padding:0 0.5rem;">+</button>
+              <button aria-label="Remove ${item.name} from cart" class="cart-btn-remove" data-id="${item.id}" style="background:none; border:none; color: #c66; cursor:pointer; font-weight:bold; font-size:1.1rem; margin-left: 1rem;">×</button>
+            </div>
+          </div>
+        </li>
+      `;
+    }).join('');
+    cartTotalEl.textContent = total.toFixed(2);
+  }
+
+  // Save cart to localStorage
+  function saveCart() {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }
+
+  // Open cart drawer
+  function openCart() {
+    cartDrawer.style.right = '0';
+    cartDrawer.setAttribute('aria-hidden', 'false');
+    cartDrawer.focus();
+  }
+  // Close cart drawer
+  function closeCart() {
+    cartDrawer.style.right = '-400px';
+    cartDrawer.setAttribute('aria-hidden', 'true');
+  }
+
+  // Add to cart handler
+  function addToCart(id) {
+    const product = products.find(p => p.id === id);
+    if (!product) return;
+    if (cart[id]) {
+      cart[id].quantity++;
+    } else {
+      cart[id] = {
+        ...product,
+        quantity: 1
+      };
+    }
+    saveCart();
+    updateCartCount();
+    renderCart();
+    openCart();
+  }
+
+  // Update quantity handler
+  function updateQuantity(id, delta) {
+    if (!cart[id]) return;
+    cart[id].quantity += delta;
+    if (cart[id].quantity <= 0) {
+      delete cart[id];
+    }
+    saveCart();
+    updateCartCount();
+    renderCart();
+  }
+
+  // Remove item handler
+  function removeItem(id) {
+    if (!cart[id]) return;
+    delete cart[id];
+    saveCart();
+    updateCartCount();
+    renderCart();
+  }
+
+  // Checkout placeholder
+  function checkout() {
+    if (Object.keys(cart).length === 0) {
+      alert("Your cart is empty.");
+      return;
+    }
+    alert("Thank you for your purchase! (This is just a demo checkout.)");
+    cart = {};
+    saveCart();
+    updateCartCount();
+    renderCart();
+    closeCart();
+  }
+
+  // Event delegation for product list and cart buttons
+  productListEl.addEventListener('click', e => {
+    if (e.target.classList.contains('add-to-cart-btn')) {
+      const id = parseInt(e.target.dataset.id, 10);
+      addToCart(id);
+    }
+  });
+
+  cartItemsEl.addEventListener('click', e => {
+    if (e.target.classList.contains('cart-btn-increase')) {
+      const id = parseInt(e.target.dataset.id, 10);
+      updateQuantity(id, 1);
+    }
+    if (e.target.classList.contains('cart-btn-decrease')) {
+      const id = parseInt(e.target.dataset.id, 10);
+      updateQuantity(id, -1);
+    }
+    if (e.target.classList.contains('cart-btn-remove')) {
+      const id = parseInt(e.target.dataset.id, 10);
+      removeItem(id);
+    }
+  });
+
+  cartCloseBtn.addEventListener('click', closeCart);
+
+  checkoutBtn.addEventListener('click', checkout);
+
+  // Show cart on clicking cart count in nav
+  document.querySelector('nav ul li a[href="#cart"]').addEventListener('click', e => {
+    e.preventDefault();
+    openCart();
+  });
+
+  // Keyboard accessibility: close cart on Escape key
+  document.addEventListener('keydown', e => {
+    if (e.key === "Escape" && cartDrawer.getAttribute('aria-hidden') === 'false') {
+      closeCart();
+    }
+  });
+
+  // Initial render
+  renderProducts();
+  updateCartCount();
+  renderCart();
+</script>
+<script>
+  const products = [
+    {id:1, name:"Natural Shine Shampoo", price:15.99, img:"https://source.unsplash.com/400x400/?shampoo", alt:"Bottle of Natural Shine Shampoo"},
+    {id:2, name:"Silk Touch Conditioner", price:17.99, img:"https://source.unsplash.com/400x400/?conditioner", alt:"Bottle of Silk Touch Conditioner"},
+    {id:3, name:"Volume Boost Hair Spray", price:12.49, img:"https://source.unsplash.com/400x400/?hairspray", alt:"Can of Volume Boost Hair Spray"},
+    {id:4, name:"Hair Serum", price:22.99, img:"https://source.unsplash.com/400x400/?hairserum", alt:"Bottle of Hair Serum"},
+    {id:5, name:"Deep Conditioning Mask", price:19.49, img:"https://source.unsplash.com/400x400/?hairmask", alt:"Jar of Deep Conditioning Mask"}
+  ];
+
+  const productListEl = document.getElementById('product-list');
+  const cart = JSON.parse(localStorage.getItem('cart')) || {};
+
+  function renderProducts() {
+    productListEl.innerHTML = products.map(p => `
+      <div class="product-card" tabindex="0" aria-label="${p.name}, $${p.price.toFixed(2)}">
+        <img class="product-image" src="${p.img}" alt="${p.alt}" />
+        <div class="product-info">
+          <h3 class="product-name">${p.name}</h3>
+          <p class="product-price">$${p.price.toFixed(2)}</p>
+        </div>
+        <button class="add-to-cart-btn" data-id="${p.id}" aria-label="Add ${p.name} to cart">Add to Cart</button>
+      </div>
+    `).join('');
+  }
+
+  function addToCart(id) {
+    const product = products.find(p => p.id === id);
+    if (!product) return;
+    if (cart[id]) cart[id].quantity++;
+    else cart[id] = {...product, quantity:1};
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert(`${product.name} added to cart!`);
+  }
+
+  productListEl.addEventListener('click', e => {
+    if (e.target.classList.contains('add-to-cart-btn')) {
+      addToCart(Number(e.target.getAttribute('data-id')));
+    }
+  });
+
+  window.addEventListener('DOMContentLoaded', renderProducts);
+</script>
+</body>
+</html>
